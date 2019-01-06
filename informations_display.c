@@ -18,13 +18,13 @@ int my_strlen(char const *str)
     return (i);
 }
 
-void display_files(DIR *fd)
+void display_files(DIR *dirp)
 {
-    struct dirent *dir = readdir(fd);
+    struct dirent *dir = readdir(dirp);
 
     while (dir != NULL) {
         write(1, dir->d_name, my_strlen(dir->d_name));
         write(1, "\n", 1);
-        dir = readdir(fd);
+        dir = readdir(dirp);
     }
 }

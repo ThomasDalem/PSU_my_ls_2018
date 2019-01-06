@@ -12,6 +12,6 @@
 #include <dirent.h>
 
 int my_ls(char const *filepath);
-void display_files(DIR *fd);
+void display_files(DIR *dirp);
 
 #endif /* !MY_LS_H_ */

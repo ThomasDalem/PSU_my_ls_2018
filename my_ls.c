@@ -11,15 +11,15 @@
 int my_ls(char const *filepath)
 {
     struct stat sb;
-    DIR *fd= opendir(filepath);
+    DIR *dirp= opendir(filepath);
 
-    if (fd == NULL)
+    if (dirp == NULL)
         return (84);
     if (stat(filepath, &sb) == -1) {
         write(1, "Can't find the file\n", 20);
         return(84);
     }
-    display_files(fd);
-    closedir(fd);
+    display_files(dirp);
+    closedir(dirp);
     return (0);
 }
