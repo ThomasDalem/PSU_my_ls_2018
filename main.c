@@ -12,6 +12,7 @@ int main(int ac, char **av)
     if (ac == 1) {
         write(1, "Wrong number of arguments.\nUsage : \n", 37);
         write(1, "./my_ls, -[flags] [file|directory]\n", 35);
+        return (84);
     }
     return (my_ls(av[1]));
 }

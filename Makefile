@@ -7,9 +7,12 @@
 
 SRC	=	main.c	\
 		my_ls.c \
-		informations_display.c
+		informations_display.c \
+		my_put_nbr.c \
+		my_putchar.c \
+		retrieve_infos.c
 
-FLAGS	=	-Iinclude -Wall -Werror -Wextra -g
+FLAGS	=	-Iinclude -Wall -Wextra -Werror -g
 
 NAME	=	my_ls
 

@@ -8,23 +8,13 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <unistd.h>
+#include "my_ls.h"
 
-int my_strlen(char const *str)
+void display_informations(file_info_t *file)
 {
-    int i = 0;
-
-    while (str[i] != '\0')
-        i++;
-    return (i);
-}
-
-void display_files(DIR *dirp)
-{
-    struct dirent *dir = readdir(dirp);
-
-    while (dir != NULL) {
-        write(1, dir->d_name, my_strlen(dir->d_name));
+    while (file != NULL) {
+        write(1, file->name, my_strlen(file->name));
         write(1, "\n", 1);
-        dir = readdir(dirp);
+        file = file->next;
     }
 }

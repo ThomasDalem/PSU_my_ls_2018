@@ -8,18 +8,19 @@
 #include <dirent.h>
 #include "my_ls.h"
 
+int my_strlen(char const *str)
+{
+    int i = 0;
+
+    while (str[i] != '\0')
+        i++;
+    return (i);
+}
+
 int my_ls(char const *filepath)
 {
-    struct stat sb;
-    DIR *dirp= opendir(filepath);
+    file_info_t *filesinfos = retrieve_directory_infos(filepath);
 
-    if (dirp == NULL)
-        return (84);
-    if (stat(filepath, &sb) == -1) {
-        write(1, "Can't find the file\n", 20);
-        return(84);
-    }
-    display_files(dirp);
-    closedir(dirp);
+    display_informations(filesinfos);
     return (0);
 }
