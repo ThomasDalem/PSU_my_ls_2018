@@ -10,6 +10,7 @@ SRC	=	main.c	\
 		informations_display.c \
 		my_put_nbr.c \
 		my_putchar.c \
+		get_rights.c \
 		retrieve_infos.c
 
 FLAGS	=	-Iinclude -Wall -Wextra -Werror -g
