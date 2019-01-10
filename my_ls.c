@@ -24,12 +24,11 @@ void destroy_files_infos(file_info_t *files_head)
 
     while (files_head != NULL) {
         free(files_head->rights);
-        //free(files_head->last_time_modified);
+        free(files_head->time_modified);
         next_file = files_head->next;
         free(files_head);
         files_head = next_file;
     }
-    //free(files_head);
 }
 
 int my_ls(char const *filepath)
@@ -42,7 +41,7 @@ int my_ls(char const *filepath)
     if (stat(filepath, &sb) == -1)
         return (84);
     dirp = opendir(filepath);
-    filesinfos = retrieve_directory_infos(filepath, dir, dirp);
+    filesinfos = retrieve_dir_infos(filepath, dir, dirp);
     display_informations(filesinfos);
     destroy_files_infos(filesinfos);
     closedir(dirp);

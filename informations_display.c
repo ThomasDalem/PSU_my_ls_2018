@@ -8,7 +8,9 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <time.h>
 #include "my_ls.h"
+#include "my_printf.h"
 
 char *change_date_format(char *date)
 {
@@ -29,22 +31,10 @@ void display_informations(file_info_t *file)
 {
     while (file != NULL) {
         if (file->name[0] != '.') {
-            write(1, file->rights, my_strlen(file->rights));
-            write(1, " ", 1);
-            my_put_nbr(file->nbr_of_links);
-            write(1, " ", 1);
-            write(1, file->owner_name, my_strlen(file->owner_name));
-            write(1, " ", 1);
-            write(1, file->owner_group, my_strlen(file->owner_group));
-            write(1, " ", 1);
-            my_put_nbr(file->file_size);
-            write(1, " ", 1);
-            file->last_time_modified = change_date_format(file->last_time_modified);
-            write(1, file->last_time_modified, my_strlen(file->last_time_modified));
-            free(file->last_time_modified);
-            write(1, " ", 1);
-            write(1, file->name, my_strlen(file->name));
-            write(1, "\n", 1);
+            my_printf("%s %d ", file->rights, file->nbr_of_links);
+            my_printf("%s %s ", file->owner_name, file->owner_group);
+            my_printf("%d %s ", file->file_size, file->time_modified);
+            my_printf("%s\n", file->name);
         }
         file = file->next;
     }

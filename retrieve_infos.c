@@ -14,6 +14,7 @@
 #include <pwd.h>
 #include <grp.h>
 #include "my_ls.h"
+#include "my_printf.h"
 
 char *create_filepath(char const *filepath, char *filename)
 {
@@ -55,30 +56,31 @@ void get_groups_names(file_info_t *file, struct stat sb)
     file->owner_group = grp->gr_name;
 }
 
-int retrieve_info(file_info_t **file_hd, char *filename, struct stat sb)
+file_info_t *retrieve_info(file_info_t **file_hd, char *filename, char *filepath, struct stat sb)
 {
     file_info_t *file = malloc(sizeof(file_info_t));
     file_info_t *last_node = get_last_node(*file_hd);
 
-    if (file == NULL)
-        return (84);
+    if (file == NULL || stat(filepath, &sb) == -1)
+        return (NULL);
     get_groups_names(file, sb);
     file->rights = get_rights(sb);
     file->nbr_of_links = sb.st_nlink;
     file->name = filename;
     file->file_size = sb.st_size;
-    file->last_time_modified = ctime(&sb.st_mtime);
+    file->time_modified = ctime(&sb.st_mtime);
+    file->time_modified = change_date_format(file->time_modified);
     if (*file_hd == NULL)
         *file_hd = file;
     else
         last_node->next = file;
     file->next = NULL;
-    return (0);
+    return (file);
 }
 
-file_info_t *retrieve_directory_infos(char const *filepath, struct dirent *dir, DIR *dirp)
+file_info_t *retrieve_dir_infos(char const *filepath, struct dirent *dir, DIR *dirp)
 {
-    file_info_t *file = NULL;
+    file_info_t *file_head = NULL;
     char *file_path = NULL;
     struct stat sb;
 
@@ -87,9 +89,9 @@ file_info_t *retrieve_directory_infos(char const *filepath, struct dirent *dir, 
         file_path = create_filepath(filepath, dir->d_name);
         if (stat(file_path, &sb) == -1)
             return (NULL);
-        retrieve_info(&file, dir->d_name, sb);
+        retrieve_info(&file_head, dir->d_name, file_path, sb);
         dir = readdir(dirp);
         free(file_path);
     }
-    return (file);
+    return (file_head);
 }

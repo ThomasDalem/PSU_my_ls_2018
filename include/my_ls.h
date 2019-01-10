@@ -10,6 +10,8 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <time.h>
+#include <fcntl.h>
 #include <dirent.h>
 
 typedef struct flags_s
@@ -29,16 +31,18 @@ typedef struct file_info_s
     char *owner_group;
     int nbr_of_links;
     int file_size;
-    char *last_time_modified;
+    char *time_modified;
+    //struct stat file_sb;
     struct file_info_s *next;
 } file_info_t;
 
 int my_ls(char const *filepath);
 void get_infos(char const *filepath);
-file_info_t *retrieve_directory_infos(char const *filepath, struct dirent *dir, DIR *dirp);
+file_info_t *retrieve_dir_infos(char const *filepath, struct dirent *dir, DIR *dirp);
 int my_strlen(char const *str);
-void my_put_nbr(int nbr);
 void display_informations(file_info_t *file);
 char *get_rights(struct stat sb);
+char *my_strcpy(char *dest, char const *src);
+char *change_date_format(char *date);
 
 #endif /* MY_LS_H_ */
