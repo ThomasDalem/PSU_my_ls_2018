@@ -12,6 +12,8 @@ SRC	=	main.c	\
 		my_putchar.c \
 		get_rights.c \
 		my_strcpy.c	\
+		retreive_flags.c	\
+		flag_struct_fill.c	\
 		retrieve_infos.c
 
 FLAGS	=	-Iinclude -Wall -Wextra -Werror -g -lmy -L.

@@ -58,7 +58,7 @@ char *change_filepath(char *filepath)
     return (new_filepath);
 }
 
-int my_ls(char *filepath)
+int my_ls(char *filepath, flags_t *flags)
 {
     DIR *dirp = NULL;
     struct dirent *dir = NULL;
@@ -66,7 +66,7 @@ int my_ls(char *filepath)
     int is_dir = check_directory(filepath);
 
     if (is_dir == 84) {
-        write(1, "Cannot access to the requested file\n", 36);
+        write(1, "Cannot access the requested file\n", 33);
         return (84);
     }
     else if (is_dir == 2)
@@ -77,7 +77,7 @@ int my_ls(char *filepath)
     }
     dirp = opendir(filepath);
     filesinfos = get_dir_infos(filepath, dir, dirp);
-    display_informations(filesinfos);
+    display_informations(filesinfos, flags);
     destroy_files_infos(filesinfos);
     closedir(dirp);
     return (0);

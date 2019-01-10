@@ -39,18 +39,25 @@ int get_number_of_blocks(file_info_t *file_head)
     return (blocks);
 }
 
-void display_informations(file_info_t *file)
+void display_file(file_info_t *file, flags_t *flags)
+{
+    if (flags->l == 1) {
+        my_printf("%s %d ", file->rights, file->nbr_of_links);
+        my_printf("%s %s ", file->owner_name, file->owner_group);
+        my_printf("%d %s ", file->file_size, file->time_modified);
+    }
+    my_printf("%s\n", file->name);    
+}
+
+void display_informations(file_info_t *file, flags_t *flags)
 {
     int blocks = get_number_of_blocks(file);
 
-    my_printf("total %d\n", blocks / 2);
+    if (flags->l == 1)
+        my_printf("total %d\n", blocks / 2);
     while (file != NULL) {
-        if (file->name[0] != '.') {
-            my_printf("%s %d ", file->rights, file->nbr_of_links);
-            my_printf("%s %s ", file->owner_name, file->owner_group);
-            my_printf("%d %s ", file->file_size, file->time_modified);
-            my_printf("%s\n", file->name);
-        }
+        if (file->name[0] != '.')
+            display_file(file, flags);
         file = file->next;
     }
 }
