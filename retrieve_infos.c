@@ -70,6 +70,7 @@ file_info_t *retrieve_info(file_info_t **file_hd, char *filename, char *filepath
     file->file_size = sb.st_size;
     file->time_modified = ctime(&sb.st_mtime);
     file->time_modified = change_date_format(file->time_modified);
+    file->nb_blocks = sb.st_blocks;
     if (*file_hd == NULL)
         *file_hd = file;
     else
@@ -78,7 +79,7 @@ file_info_t *retrieve_info(file_info_t **file_hd, char *filename, char *filepath
     return (file);
 }
 
-file_info_t *retrieve_dir_infos(char const *filepath, struct dirent *dir, DIR *dirp)
+file_info_t *get_dir_infos(char const *filepath, struct dirent *dir, DIR *dirp)
 {
     file_info_t *file_head = NULL;
     char *file_path = NULL;

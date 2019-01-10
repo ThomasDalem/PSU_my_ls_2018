@@ -32,13 +32,13 @@ typedef struct file_info_s
     int nbr_of_links;
     int file_size;
     char *time_modified;
-    //struct stat file_sb;
+    int nb_blocks;
     struct file_info_s *next;
 } file_info_t;
 
 int my_ls(char const *filepath);
 void get_infos(char const *filepath);
-file_info_t *retrieve_dir_infos(char const *filepath, struct dirent *dir, DIR *dirp);
+file_info_t *get_dir_infos(char const *filepath, struct dirent *dir, DIR *dirp);
 int my_strlen(char const *str);
 void display_informations(file_info_t *file);
 char *get_rights(struct stat sb);

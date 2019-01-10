@@ -27,8 +27,23 @@ char *change_date_format(char *date)
     return (new_date);
 }
 
+int get_number_of_blocks(file_info_t *file_head)
+{
+    int blocks = 0;
+
+    while (file_head != NULL) {
+        if (file_head->name[0] != '.')
+            blocks += file_head->nb_blocks;
+        file_head = file_head->next;
+    }
+    return (blocks);
+}
+
 void display_informations(file_info_t *file)
 {
+    int blocks = get_number_of_blocks(file);
+
+    my_printf("total %d\n", blocks / 2);
     while (file != NULL) {
         if (file->name[0] != '.') {
             my_printf("%s %d ", file->rights, file->nbr_of_links);

@@ -41,7 +41,7 @@ int my_ls(char const *filepath)
     if (stat(filepath, &sb) == -1)
         return (84);
     dirp = opendir(filepath);
-    filesinfos = retrieve_dir_infos(filepath, dir, dirp);
+    filesinfos = get_dir_infos(filepath, dir, dirp);
     display_informations(filesinfos);
     destroy_files_infos(filesinfos);
     closedir(dirp);
