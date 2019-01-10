@@ -16,7 +16,7 @@
 #include "my_ls.h"
 #include "my_printf.h"
 
-char *create_filepath(char const *filepath, char *filename)
+char *create_filepath(char *filepath, char *filename)
 {
     int size_path = my_strlen(filepath);
     int size_name = my_strlen(filename);
@@ -79,7 +79,7 @@ file_info_t *retrieve_info(file_info_t **file_hd, char *filename, char *filepath
     return (file);
 }
 
-file_info_t *get_dir_infos(char const *filepath, struct dirent *dir, DIR *dirp)
+file_info_t *get_dir_infos(char *filepath, struct dirent *dir, DIR *dirp)
 {
     file_info_t *file_head = NULL;
     char *file_path = NULL;

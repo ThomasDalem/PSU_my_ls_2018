@@ -36,13 +36,13 @@ typedef struct file_info_s
     struct file_info_s *next;
 } file_info_t;
 
-int my_ls(char const *filepath);
-void get_infos(char const *filepath);
-file_info_t *get_dir_infos(char const *filepath, struct dirent *dir, DIR *dirp);
-int my_strlen(char const *str);
+int my_ls(char *filepath);
+void get_infos(char *filepath);
+file_info_t *get_dir_infos(char *filepath, struct dirent *dir, DIR *dirp);
+int my_strlen(char *str);
 void display_informations(file_info_t *file);
 char *get_rights(struct stat sb);
-char *my_strcpy(char *dest, char const *src);
+char *my_strcpy(char *dest, char *src);
 char *change_date_format(char *date);
 
 #endif /* MY_LS_H_ */
