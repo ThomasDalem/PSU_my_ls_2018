@@ -49,10 +49,17 @@ void display_file(file_info_t *file, flags_t *flags)
     my_printf("%s\n", file->name);    
 }
 
+void sort_by_time()
+{
+
+}
+
 void display_informations(file_info_t *file, flags_t *flags)
 {
     int blocks = get_number_of_blocks(file);
 
+    if (flags->t == 1)
+        sort_by_time(&file);
     if (flags->l == 1)
         my_printf("total %d\n", blocks / 2);
     while (file != NULL) {

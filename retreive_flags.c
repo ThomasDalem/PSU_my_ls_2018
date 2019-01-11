@@ -4,7 +4,6 @@
 ** File description:
 ** Functions to retreive the flags given by the user
 */
-
 #include <stdlib.h>
 #include "my_ls.h"
 

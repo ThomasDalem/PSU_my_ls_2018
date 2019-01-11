@@ -14,6 +14,7 @@ SRC	=	main.c	\
 		my_strcpy.c	\
 		retreive_flags.c	\
 		flag_struct_fill.c	\
+		my_ls_use.c	\
 		retrieve_infos.c
 
 FLAGS	=	-Iinclude -Wall -Wextra -Werror -g -lmy -L.

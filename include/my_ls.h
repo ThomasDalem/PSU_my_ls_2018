@@ -45,6 +45,7 @@ char *get_rights(struct stat sb);
 char *my_strcpy(char *dest, char *src);
 char *change_date_format(char *date);
 flags_t *get_flags(int ac, char **av);
+int use_my_ls(int ac, char **av);
 
 
 void has_r1(flags_t *flags);

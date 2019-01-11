@@ -10,18 +10,10 @@
 
 int main(int ac, char **av)
 {
-    flags_t *flags = NULL;
-    int i = 0;
-
     if (ac == 1) {
         write(1, "Wrong number of arguments.\nUsage : \n", 37);
         write(1, "./my_ls, -[flags] [file|directory]\n", 35);
         return (84);
     }
-    flags = get_flags(ac, av);
-    while (av[i][0] != '-' && i < ac - 1)
-        i++;
-    while (av[i][0] == '-' && i < ac - 1)
-        i++;
-    return (my_ls(av[i], flags));
+    return (use_my_ls(ac, av));
 }

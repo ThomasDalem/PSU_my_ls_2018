@@ -4,7 +4,6 @@
 ** File description:
 ** Functions to retreive several information of a file
 */
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
